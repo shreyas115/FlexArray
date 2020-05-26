@@ -1,0 +1,20 @@
+
+C:\Semester 2\FlexArray>gcc -c FlexArray.c  
+
+C:\Semester 2\FlexArray>gcc -c main.c 
+
+C:\Semester 2\FlexArray>gcc -o main main.o FlexArray.o 
+
+C:\Semester 2\FlexArray>main
+addr is '00000000001713B0'
+addr is '00000000001713D0'
+addr is  00000000001713F0
+this is value '121212'
+this is 'int'
+this is '121212'
+pointer is '4229664'
+this is value 'test'
+type is 'pchar'
+this is 'test'
+value is '4229952'
+From main '(null)'

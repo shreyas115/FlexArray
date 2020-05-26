@@ -1,0 +1,8 @@
+>gcc -c FlexArray.c 
+>gcc -c main.c
+gcc -o main main.o FlexArray.o
+main
+
+
+deferencing void * 
+http://www.circuitstoday.com/void-pointers-in-c
