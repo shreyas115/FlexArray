@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include<string.h>
 #include "FlexArray.h"
 #define typename(x) _Generic((x),								\
         _Bool: "_Bool",     unsigned char: "uchar",         	\
@@ -19,12 +20,18 @@ void main()
 	int i = 121212;
 	float f = 13.45f;
 	char* c = "abcd";
-	//AddElement(a,i, typename(i));
-	//AddElement(a,"test", typename("test"));
-	printf("type name %d \n",&f);
-	AddElement("",&f, typename(f));
+	AddElement(i, typename(i));
+	AddElement("test", typename("test"));
+	//printf("type name %d \n",&f);
+	AddElement(&f, typename(f));
 	//int *intArray = (int *)(&a[1]-33);
+	if(strcmp(GetType(1),"char")==0)
+		printf("value is %s\n",GetElement(1));
+	if(strcmp(GetType(0),"int")==0)
+		printf("value is %d\n",GetElement(0));
+	if(strcmp(GetType(2),"float")==0)
+		printf("value is %f\n",*((float*)GetElement(2)));
 	//printf("From main '%d'\n",GetElement(1));
 	//printf("From main '%s'\n",(GetElement(1)));
-	printf("From main %f\n",*((float*)GetElement(1)));
+	//printf("From main %f\n",*((float*)GetElement(2)));
 }

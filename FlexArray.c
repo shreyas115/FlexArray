@@ -22,6 +22,8 @@ float *floatArray[10];
 int intCount = -1;
 int charCount = -1;
 int floatCount = -1;
+int codedIndex[30];
+int totalCount=0;
 char* CreateFlexArray(){
 	//addr[1] = malloc(10);
 	//addr[2] = malloc(10);
@@ -39,30 +41,34 @@ char* CreateFlexArray(){
 	return &addr;
 }
 
-void AddElement(char* array, void* value, char* type)
+void AddElement(void* value, char* type)
 {
 	if(strcmp(type, "char") ==0 || strcmp(type, "pchar") ==0){
 		charArray[++charCount] = (char *)malloc(sizeof(char));
 		strcpy(charArray[charCount], (char *)value);
-		printf("this is value '%s'\n", value);
+		codedIndex[totalCount++]=1;
+		/*printf("this is value '%s'\n", value);
 		printf("type is '%s'\n", type);
 		printf("this is '%s'\n", charArray[charCount]);
 		addr[2]=charArray;
-		printf("value is '%d'\n", (&addr[2])[0]);
+		printf("value is '%d'\n", (&addr[2])[0]);*/
+		
 	}
 	else if(strcmp(type, "int") ==0 || strcmp(type, "pint") ==0){
 		intArray[++intCount] = (int *)malloc(sizeof(int));
 		intArray[intCount] = (int)value;
-		printf("this is value '%d'\n", value);
+		codedIndex[totalCount++]=2;
+		/*printf("this is value '%d'\n", value);
 		printf("this is '%s'\n", type);
 		printf("this is '%d'\n", intArray[intCount]);
 		addr[1]=intArray;
-		printf("pointer is '%d'\n", addr[1]);
+		printf("pointer is '%d'\n", addr[1]);*/
 	}
 	else if(strcmp(type, "float") ==0 || strcmp(type, "pfloat") ==0){
 		floatArray[++floatCount] = (float *)malloc(sizeof(float));
 		floatArray[floatCount] = ((float *)value);
-		printf("this is value '%f'\n", *((float *)value));
+		codedIndex[totalCount++]=3;
+		//printf("this is value '%f'\n", *((float *)value));
 		//printf("this is '%s'\n", type);
 		//printf("this is '%f'\n", floatArray[floatCount]);
 		//addr[3]=floatArray;
@@ -73,7 +79,29 @@ void AddElement(char* array, void* value, char* type)
 
 void* GetElement(int index)
 {
-	printf("getelement value is '%f'\n", *floatArray[0]);
-	return floatArray[0];
+	int type = codedIndex[index];
+	int i=0,count=0;
+	for(int i=0;i<index;i++)
+	{
+		if(codedIndex[i]==type)
+			count++;
+	}
+	if(type==1)
+		return charArray[count];
+	else if(type==2)
+		return intArray[count];
+	else
+		return floatArray[count];
+	//printf("getelement value is '%f'\n", *floatArray[0]);
+	//return floatArray[0];
 	//return floatArray[0];
 }
+char* GetType(int index)
+{	int type1= codedIndex[index];
+	if(type1==1)
+		return "char";
+	if(type1==2)
+		return "int";
+	if(type1==3)
+		return "float";
+}	
